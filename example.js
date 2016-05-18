@@ -12,8 +12,9 @@
 
 
 router.post('/comprobarUsuario', function(req, res, next) {
-	resultado = mysqlCRUD.buscarUsuario(req.body.nick, function(err, data){
-		return data;
+	mysqlCRUD.buscarUsuario(req.body.nick, function(err, data){
+		if (err) { res.status(500).send(err) }
+		res.status(200).send(data);
 	});
-	res.send(resultado);
+	
 });
